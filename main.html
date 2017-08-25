@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tic Tac Toe </title>
+    <script>
+    function startGame() {
+     document.turn = "X";
+     setMessage(document.turn + " Let's start")
+    }
+
+    function setMessage(msg) {
+     document.getElementById("message").innerText=msg;
+    }
+
+    function nextMove(square) {
+     if(square.innerText == '') {
+       square.innerText = document.turn;
+       switchTurn();
+      } else {
+        setMessage("Pick another square.")
+      }
+    }
+    
+    function switchTurn() {
+      if (checkForWinner(document.turn)){
+        setMessage("Congrats " + document.turn + ", you won!")
+      }else if(document.turn == "X"){
+        document.turn = "O";
+        setMessage("Congrats " + document.turn + ", 's turn.'")
+      } else {
+        document.turn= "X";
+        setMessage("Congrats " + document.turn + ", 's turn.'")
+      }
+
+    function checkForWinner(move){
+      var result = false;
+        if(checkRow(1, 2, 3, move) ||
+           checkRow(4, 5, 6, move) ||
+           checkRow(7, 8, 9, move) ||
+           checkRow(1, 4, 7, move) ||
+           checkRow(2, 5, 8, move) ||
+           checkRow(3, 6, 9, move) ||
+           checkRow(1, 5, 9, move) ||
+           checkRow(3, 5, 7, move)) {
+           result=true;
+        }
+        return result;
+    }
+    function checkRow(a, b, c, move){
+      var result = false;
+      if (getBox(a) == move && getBox(b)== move && getBox(c) == move){
+        result = true;
+      }
+      return result;
+    }
+
+    function getBox(number) {
+      return document.getElementById("s" + number).innerText;
+    }
+
+    </script>
+    <style>
+
+    @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+      body {
+        width: 550px;
+        margin: auto;
+        background: #EAF2EF;
+      }
+      h1 {
+        border-bottom: 1px solid black;
+        font-family: 'Slabo 27px', serif;
+
+      }
+
+      .Square{
+         height: 80px;
+         width: 80px;
+         font-size: 45pt;
+         text-align: center;
+         font-family: 'Lato', sans-serif;
+      }
+      #message {
+        fontsize: 15pt;
+        font-family: 'Slabo 27px', serif;
+      }
+    </style>
+  </head>
+  <body onload="startGame()";>
+    <h1>Tic Tac Toe in JavaScipt </h1>
+    <div id ="message">Display of msg </div>
+    <table border="1">
+      <tr>
+        <td class = "Square" id="s1"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s2"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s3"  onClick="nextMove(this)"></td>
+      </tr>
+      <tr>
+        <td class = "Square" id="s4"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s5"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s6"  onClick="nextMove(this)"></td>
+      </tr>
+      <tr>
+        <td class = "Square" id="s7"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s8"  onClick="nextMove(this)"></td>
+        <td class = "Square" id="s9"  onClick="nextMove(this)"></td>
+      </tr>
+    </table>
+
+  </body>
+</html>
